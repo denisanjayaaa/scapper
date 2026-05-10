@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+streamlit
+playwright
+playwright-stealth
+openai
+beautifulsoup4
+pandas
+python-dotenv
+nest_asyncio
