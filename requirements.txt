@@ -8,3 +8,4 @@ beautifulsoup4
 pandas
 python-dotenv
 nest_asyncio
+requests

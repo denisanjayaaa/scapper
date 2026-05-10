@@ -1,12 +1,15 @@
 import streamlit as st
 import requests
 import pandas as pd
+import os
 
 st.set_page_config(page_title="Real-Time Marketplace Price Aggregator", layout="wide")
 
 st.title("🛒 Real-Time Marketplace Price Aggregator (Indonesia)")
 st.write("Search for products across multiple marketplaces in real-time. We use AI to verify specs and filter bait prices.")
-st.write("**Note**: Ensure the FastAPI backend is running on `http://localhost:8000`")
+
+# Use environment variable for backend URL, default to localhost for local dev
+BACKEND_URL = os.environ.get("BACKEND_URL", "http://localhost:8000")
 
 query = st.text_input("Enter product name (e.g., 'DDR4 8GB 3200MHz'):")
 
@@ -18,7 +21,7 @@ if st.button("Search Now"):
         status_placeholder.info("Starting search engine... This will take a moment as it scrapes multiple sites.")
 
         try:
-            response = requests.post("http://localhost:8000/search", json={"query": query}, timeout=300)
+            response = requests.post(f"{BACKEND_URL}/search", json={"query": query}, timeout=300)
 
             if response.status_code == 200:
                 results = response.json().get("results", [])
